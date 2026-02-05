@@ -1,0 +1,15 @@
+# Dependencies
+backend/node_modules/
+
+# Environment Variables
+mobile-app/node_modules
+
+.env
+
+# Expo specific
+.expo/
+dist/
+npm-debug.log*
+
+# OS files
+.DS_Store
