@@ -9,13 +9,20 @@ import MyTabs from './components/MyTabs';
 import FeedbackScreen from './components/FeedbackScreen';
 import SuccessScreen from './components/SuccessScreen';
 
+
 export default function App() {
 
   const Stack = createNativeStackNavigator();
   return (
     <SafeAreaProvider>
    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator 
+       initialRouteName="Login"
+       screenOptions={{
+    headerTitleAlign: 'center', 
+    
+  }}
+       >
         
         {/* Login Screen */}
         <Stack.Screen 

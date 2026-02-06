@@ -44,7 +44,7 @@ const HomeScreen = ({navigation}) => {
             </View>
           </View>
         </View>
-
+       
         {/* Section Title & Badge */}
         <View style={styles.sectionHeader}>
           <View style={styles.titleRow}>

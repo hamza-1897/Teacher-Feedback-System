@@ -27,18 +27,23 @@ const MyTabs = () => {
           
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-       
+        headerTitleAlign: 'center',
+        
         tabBarActiveTintColor: '#1c12d6', 
         tabBarInactiveTintColor: 'gray',   
         tabBarStyle: { 
           paddingBottom: 5, 
           height: 60,
-          backgroundColor: '#fff' 
+          backgroundColor: '#fff',
+          marginBottom: 20,
+          marginHorizontal: 10,
+          borderRadius: 16, 
         },
       })}
+      
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{headerShown:false}} />
-      <Tab.Screen name="History" component={HistoryScreen} />
+      <Tab.Screen name="History" component={HistoryScreen} options={{headerShown:true , headerTitle: 'Feedback History',tabBarLabel: 'My Feedback'}} />
     </Tab.Navigator>
   )
 }
