@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import TeacherCard from './TeacherCard';
 
 // Yahan apna TeacherCard import karein
 // import TeacherCard from '../components/TeacherCard'; 
@@ -38,7 +39,7 @@ const HomeScreen = () => {
               />
             </View>
             <View>
-              <Text style={styles.greeting}>Good Morning</Text>
+              <Text style={styles.greeting}>Hello !!!</Text>
               <Text style={styles.userName}>Alex Rivera</Text>
             </View>
           </View>
@@ -57,13 +58,33 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {/* CARDS SECTION:
-            Yahan aap apna loop chalayenge, misal ke taur par:
-            teachers.map(t => <TeacherCard key={t.id} {...t} />)
-        */}
+      
         <View style={styles.cardsContainer}>
-          {/* Filhal cards khali hain kyunke aap alag component se layenge */}
-          <Text style={styles.placeholderText}>Your TeacherCards will appear here...</Text>
+            {/* Yahan apne TeacherCard components ko render karein */}
+            <TeacherCard 
+              name="Mr. John Smith"
+              subject="Mathematics"
+              image="https://i.pravatar.cc/150?u=john"
+              isSubmitted={false}
+              iconName="book"
+              isOnline={true}
+            />
+            <TeacherCard 
+              name="Ms. Sarah Johnson"
+              subject="Science"
+              image="https://i.pravatar.cc/150?u=sarah"
+              isSubmitted={false}
+              iconName="science"
+              isOnline={false}
+            />
+            <TeacherCard 
+              name="Dr. Michael Brown"
+              subject="History"
+              image="https://i.pravatar.cc/150?u=michael"
+              isSubmitted={true}
+              iconName="history"
+              isOnline={true}
+            />
         </View>
 
         {/* Quick Tip Section */}
