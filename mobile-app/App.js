@@ -6,7 +6,8 @@ import Welcome from './components/Welcome';
 import LoginScreen from './components/Login';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MyTabs from './components/MyTabs';
-
+import FeedbackScreen from './components/FeedbackScreen';
+import SuccessScreen from './components/SuccessScreen';
 
 export default function App() {
 
@@ -30,6 +31,17 @@ export default function App() {
           options={{ headerShown: false }} 
         />
 
+         {/* Feedback Screen */}
+        <Stack.Screen 
+          name="Feedback" 
+          component={FeedbackScreen} 
+          options={{ title: 'Feedback Form', headerStyle: { backgroundColor: '#dfe2e7'  }, headerTintColor: '#0c0b0b' }} 
+        />
+      <Stack.Screen 
+          name="Success" 
+          component={SuccessScreen} 
+          options={{headerShown : false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaProvider>

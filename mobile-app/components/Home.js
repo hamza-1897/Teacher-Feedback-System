@@ -14,7 +14,7 @@ import TeacherCard from './TeacherCard';
 // Yahan apna TeacherCard import karein
 // import TeacherCard from '../components/TeacherCard'; 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
 
     const insets = useSafeAreaInsets();
 
@@ -34,13 +34,13 @@ const HomeScreen = () => {
           <View style={styles.profileRow}>
             <View style={styles.avatarBorder}>
               <Image 
-                source={{ uri: 'https://i.pravatar.cc/150?u=alex' }} 
+                source={{ uri: 'https://imgv3.fotor.com/images/gallery/anime-male-avatar-with-a-pair-of-glasses-made-in-fotor-ai-anime-avatar-creator_2023-06-25-054224_ybzr.jpg' }} 
                 style={styles.avatar} 
               />
             </View>
             <View>
               <Text style={styles.greeting}>Hello !!!</Text>
-              <Text style={styles.userName}>Alex Rivera</Text>
+              <Text style={styles.userName}>Muhammad Hamza</Text>
             </View>
           </View>
         </View>
@@ -48,42 +48,45 @@ const HomeScreen = () => {
         {/* Section Title & Badge */}
         <View style={styles.sectionHeader}>
           <View style={styles.titleRow}>
-            <Text style={styles.sectionTitle}>Pending Evaluations</Text>
+            <Text style={styles.sectionTitle}>Evaluations</Text>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>3</Text>
             </View>
           </View>
-          <TouchableOpacity>
-            <Text style={styles.viewAll}>View All</Text>
-          </TouchableOpacity>
+          
         </View>
 
       
         <View style={styles.cardsContainer}>
             {/* Yahan apne TeacherCard components ko render karein */}
             <TeacherCard 
-              name="Mr. John Smith"
-              subject="Mathematics"
-              image="https://i.pravatar.cc/150?u=john"
+              name="Mr. Usman"
+              subject="Database A&M"
+              image="https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-175774.jpg?semt=ais_hybrid&w=740&q=80"
               isSubmitted={false}
               iconName="book"
               isOnline={true}
+                navigation={navigation}
             />
             <TeacherCard 
-              name="Ms. Sarah Johnson"
-              subject="Science"
-              image="https://i.pravatar.cc/150?u=sarah"
+              name="Mr. Ali Hamza"
+              subject="Data Science"
+              image="https://img.freepik.com/premium-vector/boy-with-blue-hoodie-blue-hoodie-with-hoodie-it_1230457-42660.jpg?semt=ais_hybrid&w=740&q=80"
               isSubmitted={false}
               iconName="science"
               isOnline={false}
+                              navigation={navigation}
+
             />
             <TeacherCard 
-              name="Dr. Michael Brown"
-              subject="History"
-              image="https://i.pravatar.cc/150?u=michael"
+              name="Ms. Ariba Sitara"
+              subject="ITPM & C.S"
+              image="https://i.pinimg.com/736x/8c/6d/db/8c6ddb5fe6600fcc4b183cb2ee228eb7.jpg"
               isSubmitted={true}
-              iconName="history"
+              iconName="book"
               isOnline={true}
+                              navigation={navigation}
+
             />
         </View>
 
