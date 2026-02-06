@@ -1,0 +1,208 @@
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+// Yahan apna TeacherCard import karein
+// import TeacherCard from '../components/TeacherCard'; 
+
+const HomeScreen = () => {
+
+    const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{ 
+      flex: 1, 
+      paddingTop: insets.top,    // Upar notch se bachayega
+      paddingBottom: insets.bottom // Niche home bar se bachayega
+    }}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent} 
+        showsVerticalScrollIndicator={false}
+      >
+        
+        {/* Header Section (User Profile) */}
+        <View style={styles.header}>
+          <View style={styles.profileRow}>
+            <View style={styles.avatarBorder}>
+              <Image 
+                source={{ uri: 'https://i.pravatar.cc/150?u=alex' }} 
+                style={styles.avatar} 
+              />
+            </View>
+            <View>
+              <Text style={styles.greeting}>Good Morning</Text>
+              <Text style={styles.userName}>Alex Rivera</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Section Title & Badge */}
+        <View style={styles.sectionHeader}>
+          <View style={styles.titleRow}>
+            <Text style={styles.sectionTitle}>Pending Evaluations</Text>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>3</Text>
+            </View>
+          </View>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>View All</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* CARDS SECTION:
+            Yahan aap apna loop chalayenge, misal ke taur par:
+            teachers.map(t => <TeacherCard key={t.id} {...t} />)
+        */}
+        <View style={styles.cardsContainer}>
+          {/* Filhal cards khali hain kyunke aap alag component se layenge */}
+          <Text style={styles.placeholderText}>Your TeacherCards will appear here...</Text>
+        </View>
+
+        {/* Quick Tip Section */}
+        <View style={styles.tipBox}>
+          <View style={styles.tipIconContainer}>
+            <MaterialIcons name="lightbulb" size={20} color="white" />
+          </View>
+          <View style={styles.tipTextContainer}>
+            <Text style={styles.tipTitle}>Quick Tip</Text>
+            <Text style={styles.tipDescription}>
+              Honest feedback helps your teachers improve their teaching methods. Take 2 minutes to share your thoughts!
+            </Text>
+          </View>
+        </View>
+
+        {/* Bottom Spacer (Tabs ke liye space) */}
+        <View style={{ height: 100 }} />
+
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f6f6f8', // background-light
+  },
+  scrollContent: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  header: {
+    marginBottom: 32,
+  },
+  profileRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatarBorder: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    borderWidth: 2,
+    borderColor: 'rgba(19, 91, 236, 0.2)', // primary/20
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#e2e8f0',
+  },
+  greeting: {
+    fontSize: 12,
+    color: '#64748b', // slate-500
+    fontWeight: '500',
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#101622', // background-dark
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#101622',
+    marginRight: 8,
+  },
+  badge: {
+    backgroundColor: 'rgba(19, 91, 236, 0.1)',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 12,
+  },
+  badgeText: {
+    color: '#135bec',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  viewAll: {
+    fontSize: 12,
+    color: '#135bec',
+    fontWeight: '600',
+  },
+  cardsContainer: {
+    minHeight: 50,
+    marginBottom: 20,
+  },
+  placeholderText: {
+    fontSize: 12,
+    color: '#94a3b8',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  tipBox: {
+    backgroundColor: 'rgba(19, 91, 236, 0.05)',
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: 'rgba(19, 91, 236, 0.1)',
+  },
+  tipIconContainer: {
+    width: 40,
+    height: 40,
+    backgroundColor: '#135bec',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  tipTextContainer: {
+    flex: 1,
+  },
+  tipTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#1e293b',
+  },
+  tipDescription: {
+    fontSize: 12,
+    color: '#64748b',
+    marginTop: 4,
+    lineHeight: 18,
+  },
+});
+
+export default HomeScreen;
