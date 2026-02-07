@@ -5,9 +5,12 @@ const port = 3000
 const connectDB = require('./dbConfig.js')
 require('dotenv').config()
 const teacherRoutes = require('./routes/teacherRoutes.js')
-
+const studentRoutes  = require('./routes/studentRoutes.js')
+const feedbackRoutes = require('./routes/feedbackRoutes.js')
 
 app.use('/api/teacher',teacherRoutes)
+app.use('/api/students',studentRoutes)
+app.use('/api/feedback',feedbackRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

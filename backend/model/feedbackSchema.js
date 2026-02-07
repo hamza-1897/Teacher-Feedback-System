@@ -17,6 +17,6 @@ const feedbackSchema = new mongoose.Schema({
 });
 
 
-feedbackSchema.index({ studentId: 1, teacherId: 1 }, { unique: true });
-
 const Feedback = mongoose.model('Feedback', feedbackSchema);
+
+module.exports  = Feedback
