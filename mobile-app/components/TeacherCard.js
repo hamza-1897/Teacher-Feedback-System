@@ -2,9 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation }) => {
+const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation,teacher }) => {
   return (
-    <View style={[styles.card, isSubmitted && styles.submittedCard]}>
+    <TouchableOpacity style={[styles.card, isSubmitted && styles.submittedCard]}
+    onPress={() => navigation.navigate('Feedback', { teacherData: teacher })}
+    >
       <View style={styles.cardLeft}>
         <View style={styles.imageContainer}>
           <Image 
@@ -44,7 +46,7 @@ const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation }
           <Text style={styles.feedbackButtonText}>Give Feedback</Text>
         </TouchableOpacity>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 

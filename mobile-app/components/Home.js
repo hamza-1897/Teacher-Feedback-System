@@ -5,31 +5,47 @@ import {
   View,
   ScrollView,
   Image,
+  FlatList,
   TouchableOpacity,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TeacherCard from './TeacherCard';
-
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 const HomeScreen = ({navigation , route}) => {
 
+  const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll';
+
     const user = route.params?.user || 'Student';
     const insets = useSafeAreaInsets();
+    const [teachers, setTeachers] = useState([]);
+
+useEffect(() => {
+    fetchTeachers();
+  }, []);
+
+  const fetchTeachers = async () => {
+    try {
+      const response = await axios.get(BaseURI);
+      console.log('Teachers fetched:', response.data.data);
+      setTeachers(response.data.data);
+      
+    } catch (error) {
+      console.error('Error fetching teachers:', error);
+    }
+  };
 
   return (
     <View style={{ 
       flex: 1, 
-      paddingTop: insets.top,    // Upar notch se bachayega
-      paddingBottom: insets.bottom // Niche home bar se bachayega
+      paddingTop: insets.top,    
+      paddingBottom: insets.bottom 
     }}>
-      <ScrollView 
-        contentContainerStyle={styles.scrollContent} 
-        showsVerticalScrollIndicator={false}
-      >
+     
         
-        {/* Header Section (User Profile) */}
+      
         <View style={styles.header}>
           <View style={styles.profileRow}>
             <View style={styles.avatarBorder}>
@@ -45,7 +61,7 @@ const HomeScreen = ({navigation , route}) => {
           </View>
         </View>
        
-        {/* Section Title & Badge */}
+     
         <View style={styles.sectionHeader}>
           <View style={styles.titleRow}>
             <Text style={styles.sectionTitle}>Evaluations</Text>
@@ -58,37 +74,28 @@ const HomeScreen = ({navigation , route}) => {
 
       
         <View style={styles.cardsContainer}>
-            {/* Yahan apne TeacherCard components ko render karein */}
-            <TeacherCard 
-              name="Mr. Usman"
-              subject="Database A&M"
-              image="https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-175774.jpg?semt=ais_hybrid&w=740&q=80"
-              isSubmitted={false}
-              iconName="book"
-                navigation={navigation}
-            />
-            <TeacherCard 
-              name="Mr. Ali Hamza"
-              subject="Data Science"
-              image="https://img.freepik.com/premium-vector/boy-with-blue-hoodie-blue-hoodie-with-hoodie-it_1230457-42660.jpg?semt=ais_hybrid&w=740&q=80"
-              isSubmitted={false}
-              iconName="book"
-              navigation={navigation}
 
-            />
+            
+          <FlatList
+          data={teachers}
+          keyExtractor={(item) => item._id.toString()} 
+          renderItem={({ item }) => (
             <TeacherCard 
-              name="Ms. Ariba Sitara"
-              subject="ITPM & C.S"
-              image="https://i.pinimg.com/736x/8c/6d/db/8c6ddb5fe6600fcc4b183cb2ee228eb7.jpg"
-              isSubmitted={true}
-              iconName="book"
-              isOnline={true}
-                              navigation={navigation}
-
+               name={item.name} 
+               subject={item.subject} 
+               image={item.photoUrl} 
+               isSubmitted={false}
+               iconName="book"
+               navigation={navigation}
+               teacher={item}
             />
+          )}
+          contentContainerStyle={{ flexGrow: 1 }}
+           />
+            
         </View>
 
-        {/* Quick Tip Section */}
+        
         <View style={styles.tipBox}>
           <View style={styles.tipIconContainer}>
             <MaterialIcons name="lightbulb" size={20} color="white" />
@@ -101,24 +108,26 @@ const HomeScreen = ({navigation , route}) => {
           </View>
         </View>
 
-        {/* Bottom Spacer (Tabs ke liye space) */}
+       
         <View style={{ height: 100 }} />
 
-      </ScrollView>
-    </View>
+      </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f6f6f8', // background-light
+    backgroundColor: '#f6f6f8', 
   },
   scrollContent: {
     paddingHorizontal: 20,
     paddingTop: 20,
   },
   header: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
     marginBottom: 32,
   },
   profileRow: {
@@ -156,6 +165,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 16,
+    paddingHorizontal: 20,
   },
   titleRow: {
     flexDirection: 'row',
@@ -186,6 +196,8 @@ const styles = StyleSheet.create({
   cardsContainer: {
     minHeight: 50,
     marginBottom: 20,
+    flex:1,
+    paddingHorizontal: 10,
   },
   placeholderText: {
     fontSize: 12,

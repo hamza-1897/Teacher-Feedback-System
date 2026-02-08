@@ -13,7 +13,10 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const FeedbackScreen = ({navigation}) => {
+const FeedbackScreen = ({navigation , route}) => {
+
+  const teacherData = route.params?.teacherData || null;
+
   const insets = useSafeAreaInsets();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -33,13 +36,13 @@ const FeedbackScreen = ({navigation}) => {
           <View style={styles.profileSection}>
             <View style={styles.imageWrapper}>
               <Image
-                source={{ uri: 'https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-175774.jpg?semt=ais_hybrid&w=740&q=80' }}
+                source={{ uri: teacherData?.photoUrl }}
                 style={styles.teacherImage}
               />
             
             </View>
-            <Text style={styles.teacherName}>Mr. Usman</Text>
-            <Text style={styles.subjectText}>Database Administration & Management</Text>
+            <Text style={styles.teacherName}>{teacherData?.name }</Text>
+            <Text style={styles.subjectText}>{teacherData?.subject }</Text>
           </View>
 
           {/* Rating Section */}

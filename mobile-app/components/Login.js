@@ -100,7 +100,7 @@ const LoginScreen = ({navigation}) => {
               </View>
             </View>
 
-            <TouchableOpacity onPress={handleLogin} style={styles.loginButton} activeOpacity={0.8}>
+            <TouchableOpacity onPress={()=> navigation.replace('Main')} style={styles.loginButton} activeOpacity={0.8}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
