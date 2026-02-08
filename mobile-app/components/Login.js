@@ -26,7 +26,7 @@ const LoginScreen = ({navigation}) => {
           username: username.trim(),
           password: password.trim()
         });
-        const stdId = response.data.data._id;
+        const stdId = response.data.data.id;
         const studentName = response.data.data.name; 
         const gender = response.data.data.gender;
 

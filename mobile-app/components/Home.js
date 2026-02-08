@@ -23,6 +23,8 @@ const HomeScreen = ({navigation , route}) => {
     const stdId = route.params?.stdId || null;
     const insets = useSafeAreaInsets();
     const [teachers, setTeachers] = useState([]);
+console.log("Full Route Params:", JSON.stringify(route.params, null, 2));
+
 
 
   const avatarUrl = gender === 'male' 
@@ -30,8 +32,11 @@ const HomeScreen = ({navigation , route}) => {
     : 'https://img.pikbest.com/png-images/20241006/hijab-girl-cartoon-character_10930324.png!sw800';
 
 useEffect(() => {
+  console.log("Current Student ID:", stdId); // Dekhein terminal mein ID aa rahi hai ya null
+  if(stdId) {
     fetchTeachers();
-  }, []);
+  }
+}, [stdId]);
 
   const fetchTeachers = async () => {
     try {

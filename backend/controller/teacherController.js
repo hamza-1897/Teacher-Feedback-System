@@ -11,7 +11,7 @@ exports.addTeacher = async (req,res) => {
     }
 }
 
-exports.getAllTeachers = async (req, res) => {
+exports.getAllTeacher = async (req, res) => {
     try {
         const { stdId } = req.params; 
         const teachers = await Teacher.find();
