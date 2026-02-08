@@ -11,11 +11,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TeacherCard from './TeacherCard';
 
-// Yahan apna TeacherCard import karein
-// import TeacherCard from '../components/TeacherCard'; 
 
-const HomeScreen = ({navigation}) => {
 
+const HomeScreen = ({navigation , route}) => {
+
+    const user = route.params?.user || 'Student';
     const insets = useSafeAreaInsets();
 
   return (
@@ -40,7 +40,7 @@ const HomeScreen = ({navigation}) => {
             </View>
             <View>
               <Text style={styles.greeting}>Hello !!!</Text>
-              <Text style={styles.userName}>Muhammad Hamza</Text>
+              <Text style={styles.userName}>{user}</Text>
             </View>
           </View>
         </View>
@@ -65,7 +65,6 @@ const HomeScreen = ({navigation}) => {
               image="https://img.freepik.com/free-vector/smiling-young-man-illustration_1308-175774.jpg?semt=ais_hybrid&w=740&q=80"
               isSubmitted={false}
               iconName="book"
-              isOnline={true}
                 navigation={navigation}
             />
             <TeacherCard 
@@ -73,9 +72,8 @@ const HomeScreen = ({navigation}) => {
               subject="Data Science"
               image="https://img.freepik.com/premium-vector/boy-with-blue-hoodie-blue-hoodie-with-hoodie-it_1230457-42660.jpg?semt=ais_hybrid&w=740&q=80"
               isSubmitted={false}
-              iconName="science"
-              isOnline={false}
-                              navigation={navigation}
+              iconName="book"
+              navigation={navigation}
 
             />
             <TeacherCard 

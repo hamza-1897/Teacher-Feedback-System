@@ -5,22 +5,51 @@ import {
   View, 
   TextInput, 
   TouchableOpacity, 
-  
+  ToastAndroid,
   KeyboardAvoidingView, 
   Platform,
   ScrollView
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import axios from 'axios';
 
 const LoginScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const BaseURI = 'http://10.104.253.200:3000/api/students/login';
+
+    const handleLogin = async () => {
+      try {
+        const response = await axios.post(BaseURI, {
+          username: username.trim(),
+          password: password.trim()
+        });
+        const studentName = response.data.data.name; 
+
+        if (response.status === 200) {
+          navigation.replace('Main', { screen: 'Home', params: { user: studentName } });
+          ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
+        } 
+        
+       
+     } catch (error) {
+       if(response.status === 404 || response.status === 401) {
+          ToastAndroid.show('invalid username or password', ToastAndroid.SHORT);
+      } else {
+        ToastAndroid.show('Login failed. Please try again.', ToastAndroid.SHORT);
+      }
+     }
+    }
 
   return (
-    <View style={styles.container}>
-     <KeyboardAvoidingView 
+    <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : undefined} 
         style={{ flex: 1 }}
       >
+    <View style={styles.container}>
+     
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           
           <View style={styles.headerContainer}>
@@ -39,8 +68,11 @@ const LoginScreen = ({navigation}) => {
                 <MaterialIcons name="person" size={20} color="#94a3b8" style={styles.inputIcon} />
                 <TextInput 
                   style={styles.input}
+                  value={username}
+                  onChangeText={setUsername}
                   placeholder="Enter your student ID"
                   placeholderTextColor="#94a3b8"
+                  autoCapitalize="none"
                 />
               </View>
             </View>
@@ -51,6 +83,9 @@ const LoginScreen = ({navigation}) => {
                 <MaterialIcons name="lock" size={20} color="#94a3b8" style={styles.inputIcon} />
                 <TextInput 
                   style={styles.input}
+                  autoCapitalize="none"
+                  value={password}
+                  onChangeText={setPassword}
                   placeholder="••••••••"
                   placeholderTextColor="#94a3b8"
                   secureTextEntry={!passwordVisible}
@@ -65,7 +100,7 @@ const LoginScreen = ({navigation}) => {
               </View>
             </View>
 
-            <TouchableOpacity onPress={()=> navigation.replace('Main')} style={styles.loginButton} activeOpacity={0.8}>
+            <TouchableOpacity onPress={handleLogin} style={styles.loginButton} activeOpacity={0.8}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
@@ -77,8 +112,9 @@ const LoginScreen = ({navigation}) => {
           </View>
 
         </ScrollView>
-      </KeyboardAvoidingView>
+      
     </View>
+</KeyboardAvoidingView>
   );
 };
 
