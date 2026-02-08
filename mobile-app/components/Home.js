@@ -16,11 +16,18 @@ import axios from 'axios';
 
 const HomeScreen = ({navigation , route}) => {
 
-  const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll';
+  const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll/';
 
     const user = route.params?.user || 'Student';
+    const gender = route.params?.gender || 'female';
+    const stdId = route.params?.stdId || null;
     const insets = useSafeAreaInsets();
     const [teachers, setTeachers] = useState([]);
+
+
+  const avatarUrl = gender === 'male' 
+    ? 'https://imgv3.fotor.com/images/gallery/anime-male-avatar-with-a-pair-of-glasses-made-in-fotor-ai-anime-avatar-creator_2023-06-25-054224_ybzr.jpg' 
+    : 'https://img.pikbest.com/png-images/20241006/hijab-girl-cartoon-character_10930324.png!sw800';
 
 useEffect(() => {
     fetchTeachers();
@@ -28,7 +35,7 @@ useEffect(() => {
 
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get(BaseURI);
+      const response = await axios.get(`${BaseURI}${stdId}`);
       console.log('Teachers fetched:', response.data.data);
       setTeachers(response.data.data);
       
@@ -49,13 +56,16 @@ useEffect(() => {
         <View style={styles.header}>
           <View style={styles.profileRow}>
             <View style={styles.avatarBorder}>
-              <Image 
-                source={{ uri: 'https://imgv3.fotor.com/images/gallery/anime-male-avatar-with-a-pair-of-glasses-made-in-fotor-ai-anime-avatar-creator_2023-06-25-054224_ybzr.jpg' }} 
-                style={styles.avatar} 
-              />
+              
+                <Image 
+                  source={{ uri: avatarUrl }} 
+                  style={styles.avatar} 
+                />
+            
+            
             </View>
             <View>
-              <Text style={styles.greeting}>Hello !!!</Text>
+              <Text style={styles.greeting}>Welcome !!</Text>
               <Text style={styles.userName}>{user}</Text>
             </View>
           </View>
@@ -84,7 +94,7 @@ useEffect(() => {
                name={item.name} 
                subject={item.subject} 
                image={item.photoUrl} 
-               isSubmitted={false}
+               isSubmitted={item.isSubmitted}
                iconName="book"
                navigation={navigation}
                teacher={item}

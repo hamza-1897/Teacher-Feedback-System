@@ -4,6 +4,6 @@ const router = express.Router()
 
 router.post('/create',addTeacher)
 
-router.get('/getAll',getAllTeacher)
+router.get('/getAll/:stdId',getAllTeacher)
 
 module.exports = router

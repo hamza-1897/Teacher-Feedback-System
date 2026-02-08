@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation,teacher }) => {
   return (
     <TouchableOpacity style={[styles.card, isSubmitted && styles.submittedCard]}
-    onPress={() => navigation.navigate('Feedback', { teacherData: teacher })}
+    
     >
       <View style={styles.cardLeft}>
         <View style={styles.imageContainer}>
@@ -40,7 +40,7 @@ const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation,t
       ) : (
         <TouchableOpacity 
             style={styles.feedbackButton} 
-            onPress={() => navigation.navigate('Feedback')}
+            onPress={() => navigation.navigate('Feedback', { teacherData: teacher })}
             activeOpacity={0.7}
         >
           <Text style={styles.feedbackButtonText}>Give Feedback</Text>

@@ -26,10 +26,12 @@ const LoginScreen = ({navigation}) => {
           username: username.trim(),
           password: password.trim()
         });
+        const stdId = response.data.data._id;
         const studentName = response.data.data.name; 
+        const gender = response.data.data.gender;
 
         if (response.status === 200) {
-          navigation.replace('Main', { screen: 'Home', params: { user: studentName } });
+          navigation.replace('Main', { screen: 'Home', params: { user: studentName, stdId: stdId, gender: gender } });
           ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
         } 
         
@@ -100,7 +102,7 @@ const LoginScreen = ({navigation}) => {
               </View>
             </View>
 
-            <TouchableOpacity onPress={()=> navigation.replace('Main')} style={styles.loginButton} activeOpacity={0.8}>
+            <TouchableOpacity onPress={handleLogin} style={styles.loginButton} activeOpacity={0.8}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
