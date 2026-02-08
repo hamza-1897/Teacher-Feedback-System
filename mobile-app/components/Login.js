@@ -5,7 +5,7 @@ import {
   View, 
   TextInput, 
   TouchableOpacity, 
-  SafeAreaView, 
+  
   KeyboardAvoidingView, 
   Platform,
   ScrollView
@@ -18,13 +18,11 @@ const LoginScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
      <KeyboardAvoidingView 
-        // Agar vibrate ho raha hai to 'height' ki jagah 'padding' ya null try karein Android par
         behavior={Platform.OS === 'ios' ? 'padding' : undefined} 
         style={{ flex: 1 }}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           
-          {/* Header Section */}
           <View style={styles.headerContainer}>
             <View style={styles.iconBox}>
               <MaterialIcons name="school" size={48} color="#135bec" />
@@ -33,10 +31,8 @@ const LoginScreen = ({navigation}) => {
             <Text style={styles.subtitle}>Student Portal Access</Text>
           </View>
 
-          {/* Form Section */}
           <View style={styles.formContainer}>
             
-            {/* Username Field */}
             <View style={styles.inputWrapper}>
               <Text style={styles.label}>Username</Text>
               <View style={styles.inputContainer}>
@@ -49,7 +45,6 @@ const LoginScreen = ({navigation}) => {
               </View>
             </View>
 
-            {/* Password Field */}
             <View style={styles.inputWrapper}>
               <Text style={styles.label}>Password</Text>
               <View style={styles.inputContainer}>
@@ -70,14 +65,12 @@ const LoginScreen = ({navigation}) => {
               </View>
             </View>
 
-            {/* Login Button */}
             <TouchableOpacity onPress={()=> navigation.replace('Main')} style={styles.loginButton} activeOpacity={0.8}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
 
           </View>
 
-          {/* Footer Section */}
           <View style={styles.footer}>
             <View style={styles.footerLine} />
             <Text style={styles.footerText}>AUTHORIZED ACCESS ONLY</Text>
@@ -92,7 +85,7 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f6f6f8', // background-light
+    backgroundColor: '#f6f6f8', 
   },
   scrollContainer: {
     flexGrow: 1,
@@ -107,7 +100,7 @@ const styles = StyleSheet.create({
   iconBox: {
     width: 80,
     height: 80,
-    backgroundColor: 'rgba(19, 91, 236, 0.1)', // primary/10
+    backgroundColor: 'rgba(19, 91, 236, 0.1)', 
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -116,13 +109,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#101622', // background-dark
+    color: '#101622', 
     textAlign: 'center',
     letterSpacing: -0.5,
   },
   subtitle: {
     fontSize: 14,
-    color: '#64748b', // slate-500
+    color: '#64748b', 
     fontWeight: '500',
     marginTop: 8,
   },
@@ -144,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ffffff',
     borderWidth: 1,
-    borderColor: '#e2e8f0', // slate-200
+    borderColor: '#e2e8f0', 
     borderRadius: 12,
     height: 56,
     paddingHorizontal: 16,
@@ -158,7 +151,7 @@ const styles = StyleSheet.create({
     color: '#101622',
   },
   loginButton: {
-    backgroundColor: '#135bec', // primary
+    backgroundColor: '#135bec', 
     height: 56,
     borderRadius: 12,
     justifyContent: 'center',
@@ -184,7 +177,7 @@ const styles = StyleSheet.create({
   footerLine: {
     width: 40,
     height: 4,
-    backgroundColor: '#cbd5e1', // slate-300
+    backgroundColor: '#cbd5e1', 
     borderRadius: 999,
     marginBottom: 8,
   },
