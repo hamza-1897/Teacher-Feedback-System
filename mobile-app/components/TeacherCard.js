@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation,teacher }) => {
+const TeacherCard = ({ name, subject, image, isSubmitted,stdId ,iconName, navigation,teacher }) => {
   return (
     <TouchableOpacity style={[styles.card, isSubmitted && styles.submittedCard]}
     
@@ -40,7 +40,7 @@ const TeacherCard = ({ name, subject, image, isSubmitted, iconName, navigation,t
       ) : (
         <TouchableOpacity 
             style={styles.feedbackButton} 
-            onPress={() => navigation.navigate('Feedback', { teacherData: teacher })}
+            onPress={() => navigation.navigate('Feedback', { stdid:stdId, teacherData: teacher })}
             activeOpacity={0.7}
         >
           <Text style={styles.feedbackButtonText}>Give Feedback</Text>

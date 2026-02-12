@@ -16,14 +16,14 @@ import axios from 'axios';
 
 const HomeScreen = ({navigation , route}) => {
 
-  const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll/';
+  const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll';
 
     const user = route.params?.user || 'Student';
     const gender = route.params?.gender || 'female';
     const stdId = route.params?.stdId || null;
     const insets = useSafeAreaInsets();
     const [teachers, setTeachers] = useState([]);
-console.log("Full Route Params:", JSON.stringify(route.params, null, 2));
+  
 
 
 
@@ -32,17 +32,18 @@ console.log("Full Route Params:", JSON.stringify(route.params, null, 2));
     : 'https://img.pikbest.com/png-images/20241006/hijab-girl-cartoon-character_10930324.png!sw800';
 
 useEffect(() => {
-  console.log("Current Student ID:", stdId); // Dekhein terminal mein ID aa rahi hai ya null
-  if(stdId) {
+  
+  
+  
     fetchTeachers();
-  }
-}, [stdId]);
+  
+}, []);
 
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get(`${BaseURI}${stdId}`);
-      console.log('Teachers fetched:', response.data.data);
+      const response = await axios.get(BaseURI);
       setTeachers(response.data.data);
+      
       
     } catch (error) {
       console.error('Error fetching teachers:', error);
@@ -103,6 +104,7 @@ useEffect(() => {
                iconName="book"
                navigation={navigation}
                teacher={item}
+               stdId={stdId}
             />
           )}
           contentContainerStyle={{ flexGrow: 1 }}

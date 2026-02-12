@@ -11,6 +11,16 @@ exports.addTeacher = async (req,res) => {
     }
 }
 
+exports.getTeachers = async (req,res) => {
+    try {
+        const teachers = await Teacher.find();
+        res.status(200).json({ success: true, data: teachers });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+}
+
+
 exports.getAllTeacher = async (req, res) => {
     try {
         const { stdId } = req.params; 

@@ -26,11 +26,12 @@ const LoginScreen = ({navigation}) => {
           username: username.trim(),
           password: password.trim()
         });
-        const stdId = response.data.data._id;
+        const stdId = response.data.data.id;
         const studentName = response.data.data.name; 
         const gender = response.data.data.gender;
 
         if (response.status === 200) {
+          console.log('id:', stdId);
           navigation.replace('Main', { screen: 'Home',
              params: { user: studentName, stdId: stdId, gender: gender } });
           ToastAndroid.show('Login successful!', ToastAndroid.SHORT);

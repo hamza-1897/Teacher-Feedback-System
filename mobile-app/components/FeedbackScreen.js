@@ -12,14 +12,37 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import axios from 'axios';
 
 const FeedbackScreen = ({navigation , route}) => {
 
+  const BaseURL = 'http://10.104.253.200:3000/api/feedback/submit';
+
   const teacherData = route.params?.teacherData || null;
+  const stdid = route.params?.stdid || null;
 
   const insets = useSafeAreaInsets();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+
+
+
+  const submitFeedback = async () => {  
+    console.log(' data:', {teacherId: teacherData._id, studentId: stdid, rating, comment}); 
+    try {
+      const response = await axios.post(BaseURL, {
+        teacherId: teacherData._id,
+        studentId: stdid,
+        rating: rating,
+        comment: comment
+      });
+      console.log('Feedback submitted:', response.data);
+      navigation.replace('Success');
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      
+    }
+  }
 
   return (
     <View style={[styles.container, { paddingBottom: insets.bottom }]}>
@@ -32,7 +55,7 @@ const FeedbackScreen = ({navigation , route}) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
         >
-          {/* Teacher Profile Card */}
+          
           <View style={styles.profileSection}>
             <View style={styles.imageWrapper}>
               <Image
@@ -45,7 +68,7 @@ const FeedbackScreen = ({navigation , route}) => {
             <Text style={styles.subjectText}>{teacherData?.subject }</Text>
           </View>
 
-          {/* Rating Section */}
+          
           <View style={styles.ratingSection}>
             <Text style={styles.sectionTitle}>How was your experience?</Text>
             <View style={styles.starsContainer}>
@@ -66,7 +89,7 @@ const FeedbackScreen = ({navigation , route}) => {
             <Text style={styles.ratingHint}>Tap to rate from 1 to 5 stars</Text>
           </View>
 
-          {/* Feedback Textarea */}
+          
           <View style={styles.inputSection}>
             <Text style={styles.label}>Tell us more</Text>
             <TextInput
@@ -83,12 +106,12 @@ const FeedbackScreen = ({navigation , route}) => {
           </View>
         </ScrollView>
 
-        {/* Fixed Submit Button at Bottom */}
+        
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
             style={styles.submitButton}
             activeOpacity={0.8}
-            onPress={() => navigation.replace('Success')}
+            onPress={submitFeedback}
           >
             <Text style={styles.submitButtonText}>Submit Feedback</Text>
           </TouchableOpacity>
