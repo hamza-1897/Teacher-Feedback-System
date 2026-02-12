@@ -16,18 +16,18 @@ exports.getAllTeacher = async (req, res) => {
         const { stdId } = req.params; 
         const teachers = await Teacher.find();
 
-        // Har teacher par loop chala kar check karein
+       
         const teacherList = await Promise.all(teachers.map(async (teacher) => {
             
-            // Yahan Feedback table mein check ho raha hai
+        
             const feedbackExist = await Feedback.findOne({ 
                 teacherId: teacher._id, 
                 studentId: stdId 
             });
 
             return {
-                ...teacher._doc, // Teacher ki purani sari details
-                isSubmitted: !!feedbackExist // Agar record mila toh true, warna false
+                ...teacher._doc, 
+                isSubmitted: !!feedbackExist
             };
         }));
 
