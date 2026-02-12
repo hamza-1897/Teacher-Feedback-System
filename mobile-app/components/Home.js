@@ -13,8 +13,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TeacherCard from './TeacherCard';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import { useIsFocused } from '@react-navigation/native';
 
 const HomeScreen = ({navigation , route}) => {
+  const isFocused = useIsFocused();
 
   const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll';
 
@@ -32,16 +34,16 @@ const HomeScreen = ({navigation , route}) => {
     : 'https://img.pikbest.com/png-images/20241006/hijab-girl-cartoon-character_10930324.png!sw800';
 
 useEffect(() => {
-  
-  
+  if (isFocused){
+
   
     fetchTeachers();
-  
-}, []);
+  }
+},[isFocused]);
 
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get(BaseURI);
+const response = await axios.get(`${BaseURI}?studentId=${stdId}`);
       setTeachers(response.data.data);
       
       

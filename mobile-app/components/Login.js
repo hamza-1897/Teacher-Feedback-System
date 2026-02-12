@@ -33,7 +33,7 @@ const LoginScreen = ({navigation}) => {
         if (response.status === 200) {
           console.log('id:', stdId);
           navigation.replace('Main', { screen: 'Home',
-             params: { user: studentName, stdId: stdId, gender: gender } });
+             params: { refresh : true ,user: studentName, stdId: stdId, gender: gender } });
           ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
         } 
         

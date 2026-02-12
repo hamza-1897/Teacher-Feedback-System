@@ -23,8 +23,8 @@ exports.getTeachers = async (req,res) => {
 
 exports.getAllTeacher = async (req, res) => {
     try {
-        const { stdId } = req.params; 
-        const teachers = await Teacher.find();
+const studentId = req.query.studentId; 
+       const teachers = await Teacher.find();
 
        
         const teacherList = await Promise.all(teachers.map(async (teacher) => {
@@ -32,7 +32,7 @@ exports.getAllTeacher = async (req, res) => {
         
             const feedbackExist = await Feedback.findOne({ 
                 teacherId: teacher._id, 
-                studentId: stdId 
+                studentId: studentId 
             });
 
             return {

@@ -18,8 +18,8 @@ const FeedbackScreen = ({navigation , route}) => {
 
   const BaseURL = 'http://10.104.253.200:3000/api/feedback/submit';
 
-  const teacherData = route.params?.teacherData || null;
-  const stdid = route.params?.stdid || null;
+  const { stdId, teacherData } = route.params || {};
+
 
   const insets = useSafeAreaInsets();
   const [rating, setRating] = useState(0);
@@ -28,11 +28,10 @@ const FeedbackScreen = ({navigation , route}) => {
 
 
   const submitFeedback = async () => {  
-    console.log(' data:', {teacherId: teacherData._id, studentId: stdid, rating, comment}); 
     try {
       const response = await axios.post(BaseURL, {
         teacherId: teacherData._id,
-        studentId: stdid,
+        studentId: stdId,
         rating: rating,
         comment: comment
       });

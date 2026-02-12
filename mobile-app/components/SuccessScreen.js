@@ -51,7 +51,7 @@ const SuccessScreen = ({ navigation }) => {
       <View style={styles.footer}>
         <TouchableOpacity 
           style={styles.homeButton}
-          onPress={() => navigation.replace('Main')}
+          onPress={() => navigation.goBack()}
           activeOpacity={0.8}
         >
           <Text style={styles.homeButtonText}>Back to Home</Text>
