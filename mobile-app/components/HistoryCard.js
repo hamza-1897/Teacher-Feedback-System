@@ -2,9 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const HistoryCard = ({ name, subject, date, rating, comment, image }) => {
+const HistoryCard = ({ feedback }) => {
   
-  // Rating ke hisaab se stars generate karne ka function
+  const { teacherId, rating, comment } = feedback;
+  const { name, subject, photoUrl } = teacherId;
+
+
   const renderStars = () => {
     let stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -23,10 +26,10 @@ const HistoryCard = ({ name, subject, date, rating, comment, image }) => {
 
   return (
     <TouchableOpacity style={styles.card} activeOpacity={0.9}>
-      {/* Top Section: Profile & Date */}
+     
       <View style={styles.header}>
         <View style={styles.profileRow}>
-          <Image source={{ uri: image }} style={styles.avatar} />
+          <Image source={{ uri: photoUrl }} style={styles.avatar} />
           <View>
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.subject}>{subject}</Text>
@@ -34,7 +37,7 @@ const HistoryCard = ({ name, subject, date, rating, comment, image }) => {
         </View>
       </View>
 
-      {/* Middle Section: Stars & Feedback Text */}
+     
       <View style={styles.content}>
         <View style={styles.starsRow}>
           {renderStars()}
@@ -44,7 +47,7 @@ const HistoryCard = ({ name, subject, date, rating, comment, image }) => {
         </Text>
       </View>
 
-      {/* Bottom Section: Arrow Icon */}
+      
       <View style={styles.footer}>
         <MaterialIcons name="chevron-right" size={20} color="#cbd5e1" />
       </View>
@@ -59,8 +62,8 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#f1f5f9', // slate-100
-    // Shadow for depth
+    borderColor: '#f1f5f9', 
+   
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
@@ -106,14 +109,14 @@ const styles = StyleSheet.create({
   starsRow: {
     flexDirection: 'row',
     marginBottom: 8,
-    marginLeft: -2, // Align star with text
+    marginLeft: -2, 
   },
   starIcon: {
     marginRight: 1,
   },
   comment: {
     fontSize: 13,
-    color: '#475569', // slate-600
+    color: '#475569', 
     fontStyle: 'italic',
     lineHeight: 20,
   },

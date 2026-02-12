@@ -20,9 +20,7 @@ const HomeScreen = ({navigation , route}) => {
 
   const BaseURI = 'http://10.104.253.200:3000/api/teacher/getAll';
 
-    const user = route.params?.user || 'Student';
-    const gender = route.params?.gender || 'female';
-    const stdId = route.params?.stdId || null;
+  const { user, stdId, gender } = route.params || {};
     const insets = useSafeAreaInsets();
     const [teachers, setTeachers] = useState([]);
   

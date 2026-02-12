@@ -5,10 +5,11 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './Home';
 import HistoryScreen from './History';
 
+  const Tab = createBottomTabNavigator();
+const MyTabs = ({route}) => {
 
-const MyTabs = () => {
-
-    const Tab = createBottomTabNavigator();
+  const { stdId, user, gender } = route.params || {};
+  
   return (
     <Tab.Navigator initialRouteName='Home'
     screenOptions={({ route }) => ({
@@ -42,8 +43,8 @@ const MyTabs = () => {
       })}
       
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{headerShown:false}} />
-      <Tab.Screen name="History" component={HistoryScreen} options={{headerShown:true , headerTitle: 'Feedback History',tabBarLabel: 'My Feedback'}} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{headerShown:false}} initialParams={{stdId, user, gender}} />
+      <Tab.Screen name="History" component={HistoryScreen} options={{headerShown:true , headerTitle: 'Feedback History',tabBarLabel: 'My Feedback'}} initialParams={{stdId}} />
     </Tab.Navigator>
   )
 }

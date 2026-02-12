@@ -32,13 +32,14 @@ const LoginScreen = ({navigation}) => {
 
         if (response.status === 200) {
           console.log('id:', stdId);
-          navigation.replace('Main', { screen: 'Home',
-             params: { refresh : true ,user: studentName, stdId: stdId, gender: gender } });
+          navigation.replace('Main',
+             {user: studentName, stdId: stdId, gender: gender } );
           ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
         } 
         
        
      } catch (error) {
+      const response = error.response;
        if(response.status === 404 || response.status === 401) {
           ToastAndroid.show('invalid username or password', ToastAndroid.SHORT);
       } else {

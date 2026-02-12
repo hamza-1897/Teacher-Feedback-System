@@ -33,6 +33,16 @@ exports.getFeedback = async (req,res) =>{
         res.status(200).json({success:true, data: feedback})
         
     } catch (error) {
-        res.send(500).json({success:false , message:error.message})
+        res.status(500).json({success:false , message:error.message})
     }
+}
+
+exports.getFeedbackHistory = async (req,res) =>{
+try {
+  const studentId = req.query.studentId; 
+    const feedbackHistory = await Feedback.find({ studentId }).populate('teacherId');
+    res.status(200).json({ success: true, data: feedbackHistory });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 }
