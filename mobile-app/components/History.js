@@ -1,4 +1,4 @@
-import { View, FlatList ,Text } from 'react-native'
+import { View, FlatList,ActivityIndicator ,Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import HistoryCard from './HistoryCard';
 import axios from 'axios';
@@ -14,14 +14,16 @@ const History = ({route}) => {
   const { stdId } = route.params || {};
   const insets = useSafeAreaInsets();
   const [feedbackHistory, setFeedbackHistory] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   const isFocused = useIsFocused();
 
 
   const fetchFeedbackHistory = async () => {
         try {
+          setIsLoading(true);
           const response = await axios.get(`${BaseURI}?studentId=${stdId}`);
           setFeedbackHistory(response.data.data);
+          setIsLoading(false);
         } catch (error) {
           console.error('Error fetching feedback history:', error);
         }
@@ -46,7 +48,11 @@ if (feedbackHistory.length === 0) {
   );
 }
 
-  return (
+  return isLoading ? (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#135BEC" />
+    </View>
+  ) : (
     <View style={{ 
       flex: 1, 
       paddingTop: insets.top,    

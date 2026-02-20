@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   FlatList,
+  ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -23,7 +24,7 @@ const HomeScreen = ({navigation , route}) => {
   const { user, stdId, gender } = route.params || {};
     const insets = useSafeAreaInsets();
     const [teachers, setTeachers] = useState([]);
-  
+  const [isLoading, setIsLoading] = useState(true);
 
 
 
@@ -33,7 +34,6 @@ const HomeScreen = ({navigation , route}) => {
 
 useEffect(() => {
   if (isFocused){
-
   
     fetchTeachers();
   }
@@ -41,16 +41,21 @@ useEffect(() => {
 
   const fetchTeachers = async () => {
     try {
+      setIsLoading(true);
 const response = await axios.get(`${BaseURI}?studentId=${stdId}`);
       setTeachers(response.data.data);
-      
+      setIsLoading(false);
       
     } catch (error) {
       console.error('Error fetching teachers:', error);
     }
   };
 
-  return (
+  return isLoading ? (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#135BEC" />
+    </View>
+  ) : (
     <View style={{ 
       flex: 1, 
       paddingTop: insets.top,    
