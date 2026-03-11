@@ -1,11 +1,6 @@
 # 🎓Teacher Feedback System
 A modern, full-stack mobile application that allows students to provide anonymous feedback and ratings for their teachers. This project utilizes the MERN stack (specifically for the backend) and React Native (Expo) for the cross-platform mobile experience.
-# 🚀 Features
-Teacher Directory: Fetch and display a real-time list of teachers from MongoDB.
-Interactive Rating: 1-5 star rating system for performance evaluation.
-Smooth UI Animations: Powered by Moti and Reanimated for a fluid user experience.
-Splash Screen: Animated entry with Lottie and custom developer credits.
-RESTful API: Robust Node.js/Express backend to handle data operations.
+
 ## 🛠️  Tech Stack
 # Frontend (Mobile)
 Framework: React Native (Expo)
